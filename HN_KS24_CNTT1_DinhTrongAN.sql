@@ -35,11 +35,11 @@ alter table borrow
 modify return_date date;
 alter table borrow
 add CHECK (return_date IS NULL OR return_date >= borrow_date);
-insert into reader(reader_id,reader_name,phone,email,register_date)
+insert into reader(reader_name,phone,email,register_date)
 values
-(1,"Nguyễn Văn An","0901234567","an.nguyen@gmail.com","2024-09-01"),
-(2,"Trần Thị Bình","0912345678","binh.tran@gmail.com","2024-09-05"),
-(3,"Lê Minh Châu","0923456789","chau.le@gmail.com","2024-09-10");
+("Nguyễn Văn An","0901234567","an.nguyen@gmail.com","2024-09-01"),
+("Trần Thị Bình","0912345678","binh.tran@gmail.com","2024-09-05"),
+("Lê Minh Châu","0923456789","chau.le@gmail.com","2024-09-10");
 select * from reader;
 INSERT INTO Book (book_id, book_title, author, publish_year)
 VALUES
@@ -59,7 +59,8 @@ SET return_date = '2024-10-01'
 WHERE reader_id = 1;
 UPDATE book
 SET publish_year = 2023
-WHERE publish_year >= 2021;
+WHERE publish_year >= 2021
+  AND book_id > 0;
 DELETE FROM borrow
-WHERE borrow_date < '2024-09-18';
+WHERE borrow_date < '2024-09-18' and book_id>0;
 select * from borrow
